@@ -11,7 +11,7 @@ import sys
 from keras.models import load_model
 import pickle
 import run_predict_data
-import numpy2JSON as r
+import numpy2JSON as rr
 
 max_words = 1000
 
@@ -56,12 +56,13 @@ result_a = product_model.predict(test_a, batch_size=batch_size, verbose=1)
 
 result_b = intention_model.predict(test_b, batch_size=batch_size, verbose=1)
 
+#result_a = np.fromiter([np.argmax(r) for r in result_a], int)
+#result_b = np.fromiter([np.argmax(r) for r in result_b], int)
 
-result_a = [normalize(x, axis=1, norm='l1') for x in result_a]
-result_b = [normalize(x, axis=1, norm='l1') for x in result_b]
-
+print(result_a)
+print(result_b)
 category_map = [u"期货", u"家庭财产保险", u"健康险", u"股票", u"贵金属", u"人寿保险", u"车险", u"教育险", u"基金", u"意外伤害险", u"理财"]
 intention_map = [u"肯定", u"否定", u"疑问"]
 
-r.export_result(id_list, test_a, category_map, "production.json")
-r.export_result(id_list, test_b, intention_map, "intention.json")
+rr.export_result(id_list, result_a, category_map, "production.json")
+rr.export_result(id_list, result_b, intention_map, "intention.json")

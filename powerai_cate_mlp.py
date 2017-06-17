@@ -5,7 +5,7 @@ from __future__ import print_function
 
 import numpy as np
 import keras
-import powerai_data
+import powerai_data_binary as powerai_data
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.preprocessing.text import Tokenizer
