@@ -10,7 +10,7 @@ label_files = listdir(label_dir_path)
 train_items = []
 for data_file in data_files:
     # get id based on file name
-    txt_id = data_files[0].split(".")[0]
+    txt_id = data_file.split(".")[0]
     # handle data file
     f = open(data_dir_path + data_file)
     lines = f.readlines()
