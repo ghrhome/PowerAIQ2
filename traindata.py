@@ -36,6 +36,6 @@ for data_file in data_files:
 
 s = json.dumps(train_items, ensure_ascii=False, separators=(',', ':'))
 
-f = open('train_data.txt', 'wb')
+f = open('train_data.json', 'wb')
 f.write(s.encode("utf-8"))
 f.close()
