@@ -11,14 +11,15 @@ from keras.layers import Dense, Dropout, Activation
 from keras.preprocessing.text import Tokenizer
 import sys
 
+max_words = 1000
+batch_size = 32
+epochs = 5
+
 train_intention = True
 if len(sys.argv) > 1:
     if sys.argv[1] == "a":
         train_intention = False
 
-max_words = 1000
-batch_size = 32
-epochs = 5
 
 print('Loading data...')
 (x_a_train, x_b_train, y_cate_train, y_inte_train), (
@@ -33,8 +34,6 @@ else:
     (x_train, y_train), (x_test, y_test) = (x_a_train,
                                             y_cate_train), (x_a_test, y_cate_test)
 
-print(x_test)
-print(y_test)
 print(len(x_train), 'train sequences')
 print(len(x_test), 'test sequences')
 
