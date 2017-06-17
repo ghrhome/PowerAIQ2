@@ -85,21 +85,14 @@ def get_raw_tuple(file_name):
         category = item["category_result"]
         if category in category_dict:
             category_dict[category]["freq"] += 1
-        else:
-            category_dict[category] = {}
-            category_dict[category]["id"] = len(category_dict)
-            category_dict[category]["freq"] = 1
-        category_list.append(category_dict[category]["id"])
+            category_list.append(category_dict[category]["id"])
 
         # handle category dict
         intention = item["intention_result"]
         if intention in intention_dict:
             intention_dict[intention]["freq"] += 1
-        else:
-            intention_dict[intention] = {}
-            intention_dict[intention]["id"] = len(intention_dict)
-            intention_dict[intention]["freq"] = 1
-        intention_list.append(intention_dict[intention]["id"])
+            intention_list.append(intention_dict[intention]["id"])
+
         # handle speaker list for A and B
         speaker_a_list.append(convert_speaker_list_to_seg_id_list(item["speaker_a"]))
         speaker_b_list.append(convert_speaker_list_to_seg_id_list(item["speaker_b"]))
