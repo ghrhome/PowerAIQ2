@@ -5,7 +5,7 @@ from __future__ import print_function
 
 import numpy as np
 import keras
-import powerai_data
+import powerai_data_binary as powerai_data
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.preprocessing.text import Tokenizer
@@ -75,3 +75,11 @@ score = model.evaluate(x_test, y_test,
                        batch_size=batch_size, verbose=1)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
+
+if train_intention:
+    model.save("model_intention_7.h5")
+else:
+    model.save("model_product_7.h5")
+print("Model Saved.")
+
+result_a = model.predict(x_test, batch_size=batch_size, verbose=1)

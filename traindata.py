@@ -25,7 +25,7 @@ for data_file in data_files:
     # handle lable file
     label_file_name = label_dir_path + txt_id + ".label.txt"
     f = open(label_file_name)
-    result_line = f.readline()
+    result_line = f.readline().strip()
     f.close()
     result_param = result_line.split(",")
     category_result = result_param[0]
@@ -37,5 +37,5 @@ for data_file in data_files:
 s = json.dumps(train_items, ensure_ascii=False, separators=(',', ':'))
 
 f = open('train_data.json', 'wb')
-f.write(s.encode("utf-8"))
+f.write(s.encode('utf-8'))
 f.close()
