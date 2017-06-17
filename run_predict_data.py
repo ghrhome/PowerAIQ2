@@ -75,5 +75,5 @@ def convert_speaker_list_to_seg_id_list(speaker_list, word_dict):
             if seg in word_dict:
                 seg_id_list.append(word_dict[seg]["id"])
             else:
-                print("Warning. Word not found." + seg)
+                print("Warning. Word not found.")
     return seg_id_list
