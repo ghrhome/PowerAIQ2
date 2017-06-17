@@ -32,7 +32,7 @@ def dataFormat(fileArr, resultsArr, resultMap):
         for j in range(resultMapLen):
             tempObj = {
                 "sampleId": fileArr[i],
-                "prob": result[j],
+                "prob": round(result[j], 4),
                 "label": resultMap[j]
             }
 

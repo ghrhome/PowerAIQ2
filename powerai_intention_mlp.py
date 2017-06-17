@@ -74,3 +74,4 @@ score = model.evaluate(x_test, y_test,
                        batch_size=batch_size, verbose=1)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
+model.save("model_intention_7.h5")

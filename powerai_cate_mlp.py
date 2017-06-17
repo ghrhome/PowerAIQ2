@@ -13,7 +13,7 @@ import sys
 
 max_words = 1024
 batch_size = 32
-epochs = 45
+epochs = 5
 
 train_intention = True
 if len(sys.argv) > 1:
@@ -77,3 +77,5 @@ score = model.evaluate(x_test, y_test,
                        batch_size=batch_size, verbose=1)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
+
+model.save("model_product_7.h5")

@@ -6,70 +6,17 @@ import numpy
 import random
 import pickle
 
+category_dict = {}
+
+intention_dict = {}
+word_dict = {}
+
 category_dict = {
-    u"教育险": {
-        "freq": 0,
-        "id": 8
-    },
-    u"健康险": {
-        "freq": 0,
-        "id": 3
-    },
-    u"家庭财产保险": {
-        "freq": 0,
-        "id": 2
-    },
-    u"人寿保险": {
-        "freq": 0,
-        "id": 6
-    },
-    u"意外伤害险": {
-        "freq": 0,
-        "id": 10
-    },
-    u"股票": {
-        "freq": 0,
-        "id": 4
-    },
-    u"理财": {
-        "freq": 0,
-        "id": 11
-    },
-    u"贵金属": {
-        "freq": 0,
-        "id": 5
-    },
-    u"期货": {
-        "freq": 0,
-        "id": 1
-    },
-    u"车险": {
-        "freq": 0,
-        "id": 7
-    },
-    u"基金": {
-        "freq": 0,
-        "id": 9
-    }
 }
 
 intention_dict = {
-    u"肯定": {
-        "freq": 0,
-        "id": 1
-    },
-    u"否定": {
-        "freq": 0,
-        "id": 2
-    },
-    u"疑问": {
-        "freq": 0,
-        "id": 3
-    }
+
 }
-word_dict = {}
-
-
 
 
 
@@ -85,13 +32,27 @@ def get_raw_tuple(file_name):
         category = item["category_result"]
         if category in category_dict:
             category_dict[category]["freq"] += 1
-            category_list.append(category_dict[category]["id"])
+        else:
+            ii = {}
+            ii["id"] = len(category_dict)
+            ii["freq"] = 1
+            category_dict[category] = ii
+            print(ii["id"])
+            print(category)
+        category_list.append(category_dict[category]["id"])
 
         # handle category dict
         intention = item["intention_result"]
         if intention in intention_dict:
             intention_dict[intention]["freq"] += 1
-            intention_list.append(intention_dict[intention]["id"])
+        else:
+            ii = {}
+            ii["id"] = len(intention_dict)
+            ii["freq"] = 1
+            intention_dict[intention] = ii
+            print(ii["id"])
+            print(intention)
+        intention_list.append(intention_dict[intention]["id"])
 
         # handle speaker list for A and B
         speaker_a_list.append(convert_speaker_list_to_seg_id_list(item["speaker_a"]))
@@ -132,12 +93,17 @@ def load_data(include_dict=True):
 
 
 def save_dicts():
+    print("Cate len")
+    print(len(category_dict))
+    print("Iten len")
+    print(len(intention_dict))
     pickle.dump(category_dict, open("category_dict.bin", "wb"))
     pickle.dump(intention_dict, open("intention_dict.bin", "wb"))
     pickle.dump(word_dict, open("word_dict.bin", "wb"))
 
 
 def generate_random_test_train_data(test_count=100):
+
     train_data = pickle.load(open('train_data.bin', "rb"))
     random.shuffle(train_data)
     y_data = train_data[:test_count]
