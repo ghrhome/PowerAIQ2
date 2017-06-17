@@ -1,6 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from os import listdir
-import json
 import pickle
+
 
 label_dir_path = "./trainval/label/"
 data_dir_path = "./trainval/data/"
@@ -17,13 +19,28 @@ for data_file in data_files:
     lines = f.readlines()
     speaker_a = []
     speaker_b = []
+    a_speaking = True
     for line in lines:
-        if line.startswith("A"):
-            speaker_a.append(line.strip()[2:])
-        elif line.startswith("B"):
-            speaker_b.append(line.strip()[2:])
+        l = line.strip()
+        if l.startswith("A") or l.startswith(u"Ａ".encode("utf-8")):
+            a_speaking = True
+            speaker_a.append(l.strip()[2:])
+        elif l.startswith("B") or l.startswith(u"Ｂ".encode("utf-8")):
+            a_speaking = False
+            speaker_b.append(l.strip()[2:])
+        elif l.startswith(u"客户：".encode("utf-8")):
+            a_speaking = False
+            speaker_b.append(l.strip()[3:])
+        elif l.startswith(u"客服：".encode("utf-8")):
+            a_speaking = True
+            speaker_b.append(l.strip()[3:])
+        elif not l:
+            None
         else:
-            print("Warning!!")
+            if a_speaking:
+                speaker_a.append(l)
+            else:
+                speaker_a.append(l)
     f.close()
     # handle lable file
     label_file_name = label_dir_path + txt_id + ".label.txt"
@@ -38,6 +55,3 @@ for data_file in data_files:
     train_items.append(train_item)
 
 pickle.dump(train_items, open("train_data.bin", "wb"))
-
-a = pickle.load(open("train_data.bin", "rb"))
-print(a[0])
