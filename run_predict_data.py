@@ -35,16 +35,32 @@ def load_data(dir_path, word_dict):
                 speaker_b.append(l.strip()[3:])
             elif l.startswith(u"客服：".encode("utf-8")):
                 a_speaking = True
-                speaker_b.append(l.strip()[3:])
+                speaker_a.append(l.strip()[3:])
             elif not l:
                 None
             else:
                 if a_speaking:
                     speaker_a.append(l)
                 else:
-                    speaker_a.append(l)
+                    speaker_b.append(l)
         f.close()
         id_list.append(txt_id)
+        if len(speaker_a) == 0:
+            if len(speaker_b) > 0:
+                sp = speaker_b[0].split("A")
+                if len(sp) > 1:
+                    speaker_a.append(sp[1].strip())
+        if len(speaker_b) == 0:
+            if len(speaker_a) > 0:
+                sp = speaker_a[0].split("B")
+                if len(sp) > 1:
+                    speaker_b.append(sp[1].strip())
+        # still zero
+        if len(speaker_a) == 0:
+            print("Warning a zero")
+            speaker_a.append("failed")
+        if len(speaker_b) == 0:
+            speaker_b.append("failed")
         train_items_a.append(convert_speaker_list_to_seg_id_list(speaker_a, word_dict))
         train_items_b.append(convert_speaker_list_to_seg_id_list(speaker_b, word_dict))
 
@@ -56,7 +72,7 @@ def convert_speaker_list_to_seg_id_list(speaker_list, word_dict):
     for line in speaker_list:
         seg_list = jieba.cut(line)
         for seg in seg_list:
-            if word_dict[seg]:
+            if seg in word_dict:
                 seg_id_list.append(word_dict[seg]["id"])
             else:
                 print("Warning. Word not found." + seg)

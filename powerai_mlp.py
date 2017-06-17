@@ -81,3 +81,5 @@ if train_intention:
 else:
     model.save("model_product_7.h5")
 print("Model Saved.")
+
+result_a = model.predict(x_test, batch_size=batch_size, verbose=1)

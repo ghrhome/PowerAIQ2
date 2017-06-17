@@ -49,8 +49,8 @@ for data_file in data_files:
     result_line = f.readline().strip()
     f.close()
     result_param = result_line.split(",")
-    category_result = result_param[0]
-    intention_result = result_param[1]
+    category_result = result_param[0].strip()
+    intention_result = result_param[1].strip()
     train_item = {"id": txt_id, "speaker_a": speaker_a, "speaker_b": speaker_b, "category_result": category_result,
                   "intention_result": intention_result}
     train_items.append(train_item)
