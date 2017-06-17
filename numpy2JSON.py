@@ -48,6 +48,7 @@ def dataFormat(fileArr,resultsArr,resultMap):
 
 def toJSON(data):
     return json.dumps(data,ensure_ascii=False)
+
 def save2File(data,path="."):
     file=open(path+"/result.json","w")
     file.write(data.encode('utf-8') )

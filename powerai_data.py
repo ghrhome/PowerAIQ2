@@ -76,15 +76,15 @@ def load_data(include_dict=True):
 
 def save_dicts():
     s = json.dumps(category_dict, ensure_ascii=False, separators=(',', ':'))
-    f = open('category_dict.json', 'wb')
+    f = open('category_dict.json', 'w')
     f.write(s.encode("utf-8"))
     f.close()
     s = json.dumps(intention_dict, ensure_ascii=False, separators=(',', ':'))
-    f = open('intention_dict.json', 'wb')
+    f = open('intention_dict.json', 'w')
     f.write(s.encode("utf-8"))
     f.close()
     s = json.dumps(word_dict, ensure_ascii=False, separators=(',', ':'))
-    f = open('word_dict.json', 'wb')
+    f = open('word_dict.json', 'w')
     f.write(s.encode("utf-8"))
     f.close()
 
