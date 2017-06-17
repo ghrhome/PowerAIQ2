@@ -11,7 +11,7 @@ from keras.layers import Dense, Dropout, Activation
 from keras.layers import Embedding
 from keras.layers import LSTM
 from keras.layers import Conv1D, MaxPooling1D
-from keras.datasets import imdb
+import powerai_data
 
 # Embedding
 max_features = 20000
@@ -37,7 +37,12 @@ Only 2 epochs are needed as the dataset is very small.
 '''
 
 print('Loading data...')
-(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=max_features)
+
+(x_a_train, x_b_train, y_cate_train, y_inte_train), (
+    x_a_test, x_b_test, y_cate_test, y_inte_test) = powerai_data.load_data()
+
+(x_train, y_train), (x_test, y_test) = (x_b_train,
+                                        y_inte_train), (x_b_test, y_inte_test)
 print(len(x_train), 'train sequences')
 print(len(x_test), 'test sequences')
 
