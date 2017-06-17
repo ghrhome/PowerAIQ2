@@ -5,7 +5,6 @@ import random
 
 category_dict = {}
 intention_dict = {}
-
 word_dict = {}
 
 
@@ -70,7 +69,24 @@ def load_data(include_dict=True):
     x_b_test = numpy.array(x_speaker_b_test)
     y_cate_test = numpy.array(y_category_test)
     y_inte_test = numpy.array(y_intention_test)
+    save_dicts()
+
     return (x_a_train, x_b_train, y_cate_train, y_inte_train), (x_a_test, x_b_test, y_cate_test, y_inte_test)
+
+
+def save_dicts():
+    s = json.dumps(category_dict, ensure_ascii=False, separators=(',', ':'))
+    f = open('category_dict.json', 'wb')
+    f.write(s.encode("utf-8"))
+    f.close()
+    s = json.dumps(intention_dict, ensure_ascii=False, separators=(',', ':'))
+    f = open('intention_dict.json', 'wb')
+    f.write(s.encode("utf-8"))
+    f.close()
+    s = json.dumps(word_dict, ensure_ascii=False, separators=(',', ':'))
+    f = open('word_dict.json', 'wb')
+    f.write(s.encode("utf-8"))
+    f.close()
 
 
 def generate_random_test_train_data(test_count=100):
