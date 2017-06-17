@@ -17,6 +17,7 @@ for data_file in data_files:
     # handle data file
     f = open(data_dir_path + data_file, "rb")
     lines = f.readlines()
+    f.close()
     speaker_a = []
     speaker_b = []
     a_speaking = True
@@ -41,7 +42,7 @@ for data_file in data_files:
                 speaker_a.append(l)
             else:
                 speaker_a.append(l)
-    f.close()
+
     # handle lable file
     label_file_name = label_dir_path + txt_id + ".label.txt"
     f = open(label_file_name)

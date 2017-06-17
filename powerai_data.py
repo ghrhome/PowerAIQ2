@@ -9,7 +9,7 @@ word_dict = {}
 
 
 def get_raw_tuple(file_name):
-    with open('train_data.json') as data_file:
+    with open(file_name) as data_file:
         train_data = json.load(data_file)
 
     speaker_a_list = []
